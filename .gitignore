@@ -12,6 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+# IDEs and editors
 .idea/
 .ionic/
 .sourcemaps/
@@ -20,6 +21,9 @@ npm-debug.log*
 .versions/
 coverage/
 dist/
+.history
+# dependencies
+/node_modules
 node_modules/
 tmp/
 temp/
@@ -31,5 +35,6 @@ www/
 $RECYCLE.BIN/
 
 .DS_Store
+package-lock.json
 Thumbs.db
 UserInterfaceState.xcuserstate
