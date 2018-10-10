@@ -1,0 +1,7 @@
+{
+  "name": "collaborateApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
