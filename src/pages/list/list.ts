@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { Geolocation } from '@ionic-native/geolocation';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
-export class ListPage {
+export class ListPage implements OnInit {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -26,8 +26,15 @@ export class ListPage {
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
-  }
 
+  }
+  ngOnInit(){
+    let watch = this.geolocation.watchPosition();
+      watch.subscribe((data) => {
+        console.log(data);
+      alert(JSON.stringify(data));
+      });
+  }
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(ListPage, {
