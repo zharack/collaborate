@@ -1,48 +1,70 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HomePage } from '../home/home';
+import { RegisterPage } from '../register/register';
+import { ForgotPage } from '../forgot/forgot';
 
-// import { User } from '../../providers';
-// import { MainPage } from '../';
+/**
+ * Generated class for the LoginPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'appcollaboration2018@gmail.com',
-    password: 'ionicAppGroup'
-  };
 
-  // Our translated text strings
-  private loginErrorString: string;
+  public login: FormGroup;
+  public logged: boolean;
 
-  constructor(public navCtrl: NavController,
-    public toastCtrl: ToastController) {
-
-    /* this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    }) */
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public toastCtrl: ToastController) {
+    this.login = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      pass: ['', [Validators.required, Validators.minLength(8)]]
+    });
   }
 
-  // Attempt to login in through our User service
-  doLogin() {
-    /* this.user.login(this.account).subscribe((resp) => {
-      // this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
+  }
+  
+  logForm(){
+    //TODO: LLamada rest para el login
+    if(this.logged){
+      const toast = this.toastCtrl.create({
+        message: 'Usuario o contraseña erroneos',
+        duration: 7000,
+        position: 'bottom',
+        cssClass: 'errorToast',
+        showCloseButton:true,
+        dismissOnPageChange:true,
+        closeButtonText:'Close'
       });
       toast.present();
-    }); */
-    console.log('login');
+    }else{
+      this.navCtrl.setRoot(HomePage);
+    }
+    console.log(this.login.value);
+  }
+
+  register(){
+    this.navCtrl.setRoot(RegisterPage);
+  }
+
+  forgot(){
+    this.navCtrl.push(ForgotPage);
+  }
+
+  google(){
+    console.log(123);
+  }
+
+  facebook(){
+    console.log(123);
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, IonicPageModule } from 'ionic-angular';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { LoginPage } from './login';
+import { HomePage } from './home';
 
 /**
  * Generated class for the ForgotPage page.
@@ -11,10 +11,10 @@ import { LoginPage } from './login';
  */
 
  @NgModule({
-   declarations: [LoginPage],
+   declarations: [HomePage],
    imports: [
-     IonicPageModule.forChild(LoginPage)
+     IonicPageModule.forChild(HomePage)
    ],
-   entryComponents: [LoginPage]
+   entryComponents: [HomePage]
  })
- export class LoginModule {}
+ export class HomeModule {}
