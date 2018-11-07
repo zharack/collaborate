@@ -20,6 +20,7 @@ import { ForgotPage } from '../forgot/forgot';
 export class LoginPage {
 
   public login: FormGroup;
+  public logged: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public toastCtrl: ToastController) {
     this.login = this.formBuilder.group({
@@ -34,7 +35,7 @@ export class LoginPage {
   
   logForm(){
     //TODO: LLamada rest para el login
-    if(true){
+    if(this.logged){
       const toast = this.toastCtrl.create({
         message: 'Usuario o contraseña erroneos',
         duration: 7000,
