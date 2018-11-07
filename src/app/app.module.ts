@@ -10,22 +10,27 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LoginPage } from '../pages/login/login';
+import { ForgotPage } from '../pages/forgot/forgot';
+import { RegisterPage } from '../pages/register/register';
+
+
+const pages = [
+  MyApp,
+  HomePage,
+  ListPage,
+  LoginPage,
+  ForgotPage,
+  RegisterPage
+]
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    ListPage
-  ],
+  declarations: pages,
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage
-  ],
+  entryComponents: pages,
   providers: [
     Geolocation,
     StatusBar,
