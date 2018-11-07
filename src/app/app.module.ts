@@ -8,7 +8,8 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
+import { Geolocation } from '@ionic-native/geolocation';
 @NgModule({
   declarations: [
     MyApp,
@@ -26,9 +27,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage
   ],
   providers: [
+    Geolocation,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GeoManagerProvider
   ]
 })
 export class AppModule {}
