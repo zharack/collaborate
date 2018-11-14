@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { GeoManagerData } from './geo-manager';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Geolocation, Geoposition, PositionError, Position } from '@ionic-native/geolocation'; //TODO: fallo tipado
+import { Geolocation, Geoposition, PositionError } from '@ionic-native/geolocation'; //TODO: fallo tipado
 import Utils from '../../app/utils';
 
 /*
@@ -14,13 +14,13 @@ import Utils from '../../app/utils';
 
 
 export class GeoManagerModel{
-  position:Position
+  position:Position;
 	success: boolean;
 	error?:PositionError;
 }
-export interface GeoManagerData {
-  posicionRegistrada?: Position
-  posicionPosible?: Position
+export interface GeoManagerData<T> {
+  posicionRegistrada?: T;
+  posicionPosible?: T;
 }
 
 @Injectable()
@@ -31,7 +31,7 @@ export class GeoManagerProvider {
   public static DISTANCE_MIN = 0.001; // kM
 
   //Propiedades
-  private managerData: GeoManagerData = {};
+  private managerData: GeoManagerData<Position> = {};
   private observableCordova: Observable<Geoposition>;
   private subscribeCordova: Subscription;
   private observableManager:BehaviorSubject<GeoManagerModel> = new BehaviorSubject(new GeoManagerModel);
@@ -72,12 +72,12 @@ export class GeoManagerProvider {
     response.position = null;
 
     // tratamos errores
-    if(position.toString() === '[object PositionError]'){
+    if(this.isInstanceOf<PositionError>(position, 'message')){
       response.error = position;
       this.send(response);
     }
     // tratamos posiciones
-    else if(position.toString() === '[object Position]'){
+    else if(this.isInstanceOf<Position>(position, 'coords')){
       // introducimos como posible posicion
       this.managerData.posicionPosible = position;
 
@@ -132,6 +132,10 @@ export class GeoManagerProvider {
 
   private startCordova(): Observable<Geoposition> {
     return this.geolocation.watchPosition();
+  }
+
+  private isInstanceOf<T>(object: any, property:string): object is T {
+    return property in object;
   }
 }
 
