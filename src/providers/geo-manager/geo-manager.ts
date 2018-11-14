@@ -31,10 +31,10 @@ export class GeoManagerProvider {
   public static DISTANCE_MIN = 0.001; // kM
 
   //Propiedades
-  private managerData: GeoManagerData<Position> = {};
+  private lastPosition: Position  = null;
   private observableCordova: Observable<Geoposition>;
-  private subscribeCordova: Subscription;
-  private observableManager:BehaviorSubject<GeoManagerModel> = new BehaviorSubject(new GeoManagerModel);
+  private subscribeCordova: Subscription = null;
+  private observableManager:BehaviorSubject<GeoManagerModel> = new BehaviorSubject(null);
 
   constructor(private geolocation: Geolocation) {
     console.log('Instanciando GeoManager');
@@ -44,11 +44,11 @@ export class GeoManagerProvider {
    * Función para arrancar Geo Cordova y devolver nuestro obs
    */
   public startWatch():Observable<GeoManagerModel>{
-		// si no esta arrancado geo cordova
-    if(!this.observableCordova){
-			// arrancamos
-			this.observableCordova = this.startCordova();
+    // si no esta arrancado geo cordova
+    this.startCordova();
 
+
+    if(!this.subscribeCordova){
 			// subscribe
       this.subscribeCordova = this.observableCordova.subscribe((position)=>{
         console.group("[subscribeCordova]");
@@ -79,13 +79,14 @@ export class GeoManagerProvider {
     // tratamos posiciones
     else if(this.isInstanceOf<Position>(position, 'coords')){
       // introducimos como posible posicion
-      this.managerData.posicionPosible = position;
+      // this.managerData.posicionPosible = position;
 
       // posicion valida?
-      if(this.checkPosition()){
-        this.managerData.posicionRegistrada = position;
+      if(this.checkPosition(response)){
+        // this.managerData.posicionRegistrada = position;
         response.success = true;
         response.position = position;
+        this.lastPosition = position;
         this.send(response);
       }
     }
@@ -93,45 +94,45 @@ export class GeoManagerProvider {
     return response;
   }
 
-  public getNativeGeo():Observable<Geoposition>{
-    return this.startCordova();
-  }
-
   private send(request:GeoManagerModel){
 		// propagamos request a nuestro observable
     this.observableManager.next(request);
+    
 
     //log
     console.group("[subscribeManager]");
     console.log(request);
+    console.log(this.lastPosition);
     console.groupEnd();
   }
 
-	private checkPosition(): boolean {
-    return this.checkDistance() && this.checkTime();
+	private checkPosition(response: GeoManagerModel): boolean {
+    return this.checkDistance(response.position) && this.checkTime(response.position);
   }
 
-  private checkDistance(){
+  private checkDistance(posicionRef: Position){
     let success = true;
 
-    if(this.managerData.posicionRegistrada && this.managerData.posicionPosible){
-      success =
-      Utils.getDistanceFromLatLonInKm(
-          this.managerData.posicionRegistrada.coords.latitude,
-          this.managerData.posicionRegistrada.coords.longitude,
-          this.managerData.posicionPosible.coords.latitude,
-          this.managerData.posicionPosible.coords.longitude
+    if(posicionRef && this.lastPosition!==null){
+      success = Utils.getDistanceFromLatLonInKm(
+          posicionRef.coords.latitude,
+          posicionRef.coords.longitude,
+          this.lastPosition.coords.latitude,
+          this.lastPosition.coords.longitude
         ) > GeoManagerProvider.DISTANCE_MIN;
     }
     return success;
   }
 
-	private checkTime(): boolean {
+	private checkTime(response: Position): boolean {
 		return true;
 	}
 
   private startCordova(): Observable<Geoposition> {
-    return this.geolocation.watchPosition();
+    if(!this.observableCordova){
+      this.observableCordova = this.geolocation.watchPosition();
+    }
+    return this.observableCordova;
   }
 
   private isInstanceOf<T>(object: any, property:string): object is T {
