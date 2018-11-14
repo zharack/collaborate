@@ -19,11 +19,9 @@ export class HomePage implements OnInit, OnDestroy {
 
 
   ngOnInit(){
-    this.geolocation.capture().subscribe((val:GeoManagerModel)=>{
-      console.log('i got that', val);
-      this.show = JSON.stringify(val);
-    })
-
+    this.geolocation.startWatch().subscribe(
+      (val:GeoManagerModel) => { }
+    );
   }
   ngOnDestroy(): void {
 

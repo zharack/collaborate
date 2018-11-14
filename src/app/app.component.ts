@@ -39,7 +39,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.geolocation.background();
+     
     });
   }
 
