@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, IonicPageModule } from 'ionic-angular';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { NgModule } from '@angular/core';
 import { RegisterPage } from './register';
 
 /**
