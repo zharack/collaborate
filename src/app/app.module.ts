@@ -10,11 +10,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MapPage } from '../pages/map/map';
+// import { GoogleMaps } from '@ionic-native/google-maps';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    MapPage
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { Geolocation } from '@ionic-native/geolocation';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    MapPage
   ],
   providers: [
     Geolocation,
@@ -32,6 +36,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GeoManagerProvider
+    // ,GoogleMaps
   ]
 })
 export class AppModule {}

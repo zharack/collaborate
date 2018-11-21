@@ -36,6 +36,8 @@ export class GeoManagerProvider {
   private subscribeCordova: Subscription = null;
   private observableManager:BehaviorSubject<GeoManagerModel> = new BehaviorSubject(null);
 
+  private timecounter: any;
+
   constructor(private geolocation: Geolocation) {
     console.log('Instanciando GeoManager');
   }
@@ -95,12 +97,23 @@ export class GeoManagerProvider {
   }
 
   private send(request:GeoManagerModel){
-		// propagamos request a nuestro observable
-    this.observableManager.next(request);
+    try{
+      clearTimeout(this.timecounter);
+    }catch(err){
+
+    }
+    // propagamos request a nuestro observable
+    if(request && request!==null){
+      this.observableManager.next(request);
+      this.timecounter = setTimeout(()=>{
+        this.send(this.observableManager.getValue());
+      },GeoManagerProvider.SEND_DELAY);
+    }
+
     
 
     //log
-    console.group("[subscribeManager]");
+    console.group("[subscribeManager - send Data]");
     console.log(request);
     console.log(this.lastPosition);
     console.groupEnd();
