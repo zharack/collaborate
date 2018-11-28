@@ -21,6 +21,8 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/camera": "^4.17.0",
+    "@ionic-native/camera-preview": "^4.17.0",
     "@ionic-native/core": "^4.17.0",
     "@ionic-native/device": "^4.17.0",
     "@ionic-native/geolocation": "^4.15.0",
@@ -31,6 +33,7 @@
     "@ionic/storage": "2.2.0",
     "cordova-android": "7.1.1",
     "cordova-browser": "5.0.4",
+    "cordova-plugin-camera-preview": "0.10.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-googlemaps": "2.4.6",
@@ -70,7 +73,9 @@
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-camera-preview": {}
     },
     "platforms": [
       "android",
