@@ -28,6 +28,31 @@
   </script>-->
 
   <link href="build/main.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+      <!-- Add additional services that you want to use -->
+      <!-- <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-messaging.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-functions.js"></script> -->
+
+      <!-- Comment out (or don't include) services that you don't want to use -->
+      <!-- <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-storage.js"></script> -->
+
+      <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+          apiKey: "",
+          authDomain: "app-collaborate.firebaseapp.com",
+          databaseURL: "https://app-collaborate.firebaseio.com",
+          projectId: "app-collaborate",
+          storageBucket: "app-collaborate.appspot.com",
+          messagingSenderId: "app-collaborate",
+        };
+        console.log('firebase init');
+        firebase.initializeApp(config);
+      </script>
 
 </head>
 <body>

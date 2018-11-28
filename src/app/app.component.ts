@@ -7,6 +7,9 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import {MapPage}from '../pages/map/map';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -28,8 +31,10 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'Map', component: MapPage }
-      
+      { title: 'Map', component: MapPage },
+      { title: 'Login', component: LoginPage },
+      { title: 'Register', component: RegisterPage }
+
     ];
 
   }
@@ -40,14 +45,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-     
+      
     });
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
+    // this.nav.push(page.component);
     this.nav.setRoot(page.component);
   }
 }

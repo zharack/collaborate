@@ -12,24 +12,28 @@ import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MapPage } from '../pages/map/map';
 // import { GoogleMaps } from '@ionic-native/google-maps';
+import { LoginPage } from '../pages/login/login';
+import { ForgotPage } from '../pages/forgot/forgot';
+import { RegisterPage } from '../pages/register/register';
+
+const pages = [
+  MyApp,
+  HomePage,
+  ListPage,
+  LoginPage,
+  ForgotPage,
+  RegisterPage,
+  MapPage
+]
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    ListPage,
-    MapPage
-  ],
+  declarations: pages,
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
+    // IonicPageModule.forChild(ForgotPage)
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage,
-    MapPage
-  ],
+  entryComponents: pages,
   providers: [
     Geolocation,
     StatusBar,
