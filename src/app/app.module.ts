@@ -15,8 +15,9 @@ import { MapPage } from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPage } from '../pages/forgot/forgot';
 import { RegisterPage } from '../pages/register/register';
-import {Device} from '@ionic-native/device';
+import { Device } from '@ionic-native/device';
 import { Network } from '@ionic-native/network';
+import { CameraPage } from '../pages/camera/camera';
 
 const pages = [
   MyApp,
@@ -25,7 +26,8 @@ const pages = [
   LoginPage,
   ForgotPage,
   RegisterPage,
-  MapPage
+  MapPage,
+  CameraPage
 ]
 @NgModule({
   declarations: pages,

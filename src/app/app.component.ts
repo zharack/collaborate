@@ -6,9 +6,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
-import {MapPage}from '../pages/map/map';
+import { MapPage }from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { CameraPage } from '../pages/camera/camera';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,7 +34,8 @@ export class MyApp {
       { title: 'List', component: ListPage },
       { title: 'Map', component: MapPage },
       { title: 'Login', component: LoginPage },
-      { title: 'Register', component: RegisterPage }
+      { title: 'Register', component: RegisterPage },
+      { title: 'Camera', component: CameraPage }
 
     ];
 

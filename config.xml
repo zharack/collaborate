@@ -92,8 +92,8 @@
     </plugin>
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
-    <engine name="android" spec="7.1.1" />
-    <engine name="browser" spec="5.0.4" />
     <plugin name="cordova-plugin-camera" spec="~4.0.3" />
     <plugin name="cordova-plugin-camera-preview" spec="0.10.0" />
+    <engine name="android" spec="7.1.1" />
+    <engine name="browser" spec="5.0.4" />
 </widget>
