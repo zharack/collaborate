@@ -25,9 +25,14 @@ import { GeoManagerProvider, GeoManagerModel } from '../../providers/geo-manager
 export class MapPage {
   map: GoogleMap;
   mapLoaded = false;
+  subs;
   constructor(public navCtrl: NavController, public navParams: NavParams, public geoManager:GeoManagerProvider) { // , public googleMaps:GoogleMaps
   }
 
+  ionViewWillUnload(){
+    alert(123);
+    // this.subs.unsubscribe();
+  }
   
   ionViewDidLoad() {
       this.loadMap();
@@ -42,7 +47,8 @@ export class MapPage {
 
     this.geoManager.startWatch().subscribe((ref:GeoManagerModel)=>{
       console.log('STARTING', ref);
-      if(ref && !this.mapLoaded){
+      debugger;
+      if(ref && ref.success && !this.mapLoaded){
         let mapOptions: GoogleMapOptions = {
           camera: {
               target: {

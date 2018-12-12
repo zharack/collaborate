@@ -17,6 +17,7 @@ import { ForgotPage } from '../pages/forgot/forgot';
 import { RegisterPage } from '../pages/register/register';
 import {Device} from '@ionic-native/device';
 import { Network } from '@ionic-native/network';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 const pages = [
   MyApp,
@@ -44,7 +45,6 @@ const pages = [
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GeoManagerProvider
-    // ,GoogleMaps
   ]
 })
 export class AppModule {}

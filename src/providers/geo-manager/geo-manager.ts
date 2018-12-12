@@ -1,9 +1,10 @@
 import { Subscription } from 'rxjs/Subscription';
 import { GeoManagerData } from './geo-manager';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Geolocation, Geoposition, PositionError } from '@ionic-native/geolocation'; //TODO: fallo tipado
 import Utils from '../../app/utils';
+import { map } from 'rxjs/operator/map';
 
 /*
   Generated class for the GeoManagerProvider provider.
@@ -27,8 +28,8 @@ export interface GeoManagerData<T> {
 export class GeoManagerProvider {
 
   // Config
-  public static SEND_DELAY=3000;
-  public static DISTANCE_MIN = 0.001; // kM
+  public static SEND_DELAY=10000;
+  public static DISTANCE_MIN = 0.00001; // kM
 
   //Propiedades
   private lastPosition: Position  = null;
@@ -48,7 +49,7 @@ export class GeoManagerProvider {
   public startWatch():Observable<GeoManagerModel>{
     // si no esta arrancado geo cordova
     this.startCordova();
-
+    console.log(this.subscribeCordova);
 
     if(!this.subscribeCordova){
 			// subscribe
@@ -60,22 +61,36 @@ export class GeoManagerProvider {
         // informamos a nuestro obs
         this.newPosition(position);
       });
+      console.log(this.subscribeCordova);
     }
-    return this.observableManager.asObservable();
+    return this.observableManager.asObservable().filter(ref=>{
+      return ref!==null;
+    });
+    // TODO: Añadir un map con el control de errores.
   }
 
+
+  transformCall(){
+    let response = new GeoManagerModel();
+    response.success = false;
+    response.position = null;
+    return response;
+  }
    /**
    * Función que acepta peticiones entrantes de posiciones para un posible envio del manager obs
    */
   public newPosition(position: Position | PositionError): GeoManagerModel{
 		// response
-    let response = new GeoManagerModel();
-    response.success = false;
-    response.position = null;
 
+    let response  = this.transformCall();
     // tratamos errores
+    // TODO: Añadir los errores de falta de gelocalizacion en el dispositivo
+    // O falta de conexión a internet por network o modo avion....
+    // o algun caso del device
     if(this.isInstanceOf<PositionError>(position, 'message')){
       response.error = position;
+      response.success = false;
+      response.position = this.lastPosition;
       this.send(response);
     }
     // tratamos posiciones
@@ -84,6 +99,8 @@ export class GeoManagerProvider {
       // this.managerData.posicionPosible = position;
 
       // posicion valida?
+
+      // TODO: Quitar bloqueo de la pantalla
       if(this.checkPosition(response)){
         // this.managerData.posicionRegistrada = position;
         response.success = true;
@@ -96,21 +113,32 @@ export class GeoManagerProvider {
     return response;
   }
 
-  private send(request:GeoManagerModel){
-    try{
-      clearTimeout(this.timecounter);
-    }catch(err){
 
-    }
+  private send(request:GeoManagerModel){
     // propagamos request a nuestro observable
     if(request && request!==null){
-      this.observableManager.next(request);
-      this.timecounter = setTimeout(()=>{
-        this.send(this.observableManager.getValue());
-      },GeoManagerProvider.SEND_DELAY);
+      if(request.success){
+        this.observableManager.next(request);
+      }else{
+        this.observableManager.next(request);
+      }
     }
 
-    
+    try{
+      clearTimeout(this.timecounter);
+    }catch(err){}
+    debugger;
+    this.timecounter = setTimeout(()=>{
+      // this.geolocation.getCurrentPosition().then((ref)=>{
+      //   let transformed = this.transformCall();
+      //   transformed.position = ref;
+      //   transformed.success = true;
+      //   this.send(transformed);
+      // })
+      // TODO: Cambiar este valor por escucha activa
+      // TODO: COmprobar que la respuesta no es erronea
+        this.send(request);
+    },GeoManagerProvider.SEND_DELAY);
 
     //log
     console.group("[subscribeManager - send Data]");

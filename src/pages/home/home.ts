@@ -22,7 +22,9 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit(){
     this.geolocation.startWatch().subscribe(
-      (val:GeoManagerModel) => { }
+      (val:GeoManagerModel) => {
+        console.log('RESULTADO FINAL', val);
+       }
     );
   }
   ngOnDestroy(): void {
