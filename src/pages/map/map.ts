@@ -3,11 +3,11 @@ import { NavController, NavParams } from 'ionic-angular';
 import {
   GoogleMaps,
   GoogleMap,
-  GoogleMapsEvent,
+  // GoogleMapsEvent,
   GoogleMapOptions,
   // CameraPosition,
-  MarkerOptions,
-  Marker,
+  // MarkerOptions,
+  // Marker,
   Environment
 } from '@ionic-native/google-maps';
 import { GeoManagerProvider, GeoManagerModel } from '../../providers/geo-manager/geo-manager';
@@ -30,7 +30,7 @@ export class MapPage {
 
   
   ionViewDidLoad() {
-      this.loadMap();
+      // this.loadMap();
   }
   loadMap(): any {
         // This code is necessary for browser

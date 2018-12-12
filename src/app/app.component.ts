@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
+// import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { MapPage }from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
@@ -17,14 +17,14 @@ import { CameraPage } from '../pages/camera/camera';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MapPage;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public geolocation: GeoManagerProvider
+    // public geolocation: GeoManagerProvider
     ) {
     this.initializeApp();
 
