@@ -10,10 +10,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MapPage } from '../pages/map/map';
+// import { GoogleMaps } from '@ionic-native/google-maps';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPage } from '../pages/forgot/forgot';
 import { RegisterPage } from '../pages/register/register';
-
+import {Device} from '@ionic-native/device';
+import { Network } from '@ionic-native/network';
 
 const pages = [
   MyApp,
@@ -21,7 +24,8 @@ const pages = [
   ListPage,
   LoginPage,
   ForgotPage,
-  RegisterPage
+  RegisterPage,
+  MapPage
 ]
 @NgModule({
   declarations: pages,
@@ -33,11 +37,14 @@ const pages = [
   bootstrap: [IonicApp],
   entryComponents: pages,
   providers: [
+    Device,
+    Network,
     Geolocation,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GeoManagerProvider
+    // ,GoogleMaps
   ]
 })
 export class AppModule {}

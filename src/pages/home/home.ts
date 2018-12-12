@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { GeoManagerProvider, GeoManagerModel } from './../../providers/geo-manager/geo-manager';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
+import { Geoposition } from '../../../node_modules/@ionic-native/geolocation';
+import { Subscription } from 'rxjs/Subscription';
+
 
 
 @IonicPage()
@@ -7,9 +11,21 @@ import { NavController, IonicPage } from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy {
+  posicion: Subscription;
+  public show: string;
 
-  constructor(public navCtrl: NavController) {
+
+  constructor(public navCtrl: NavController, public geolocation: GeoManagerProvider) {
+  }
+
+
+  ngOnInit(){
+    this.geolocation.startWatch().subscribe(
+      (val:GeoManagerModel) => { }
+    );
+  }
+  ngOnDestroy(): void {
 
   }
 
