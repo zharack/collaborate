@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, IonicPageModule } from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 import { ForgotPage } from './forgot';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 /**
  * Generated class for the ForgotPage page.
