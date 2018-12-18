@@ -16,7 +16,7 @@
 
 <ion-content padding>
 <ion-grid padding>
-<form [formGroup]="login" (ngSubmit)="logForm()">
+<form [formGroup]="login" (ngSubmit)="logForm($event)">
     <ion-row>
       <ion-item>
     <ion-label>User</ion-label>

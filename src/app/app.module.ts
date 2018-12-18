@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -11,9 +11,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { Geolocation } from '@ionic-native/geolocation';
-import { LoginPage } from '../pages/login/login';
 import { ForgotPage } from '../pages/forgot/forgot';
 import { RegisterPage } from '../pages/register/register';
+import { OauthService } from '../providers/oauth/oauth';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const pages = [
@@ -28,7 +29,8 @@ const pages = [
   declarations: pages,
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
     // IonicPageModule.forChild(ForgotPage)
   ],
   bootstrap: [IonicApp],
@@ -38,7 +40,8 @@ const pages = [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GeoManagerProvider
+    GeoManagerProvider,
+    OauthService
   ]
 })
 export class AppModule {}

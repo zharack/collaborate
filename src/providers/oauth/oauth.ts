@@ -2,14 +2,17 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { HttpClient } from "@angular/common/http";
 import { map } from 'rxjs/operators';
+import 'rxjs/add/observable/of';
 
 export class UserModel {
-    username: string;
-    password: string;
-    name: string;
-    email: string;
+    username?: string;
+    password?: string;
+    name?: string;
+    email?: string;
+    fb_Id: string;
+    fb_token: string;
 
-    constructor(username, name, email) {
+    constructor(username = '', name = '', email = '') {
         this.username = username;
         this.name = name;
         this.email = email;
@@ -24,28 +27,21 @@ export class OauthService {
 
     }
 
-    login(user: UserModel) {
-        if (user.username && user.password) {
+    login(user: UserModel): Observable<any> {
+        console.log('we2');
+        if (user.username !== '' && user.password !== '') {
+            console.log('wee');
             return this._http.get('https://jsonplaceholder.typicode.com/users/1').pipe(
                 map(
                     (map: any) => {
-                        return Observable.create(
-                            (obs) => {
-                                setTimeout(
-                                    () => {
-                                        const userService: UserModel = new UserModel(map.username, map.name, map.email);
-                                        this.user = userService;
-                                        return true;
-                                    }, 
-                                    4000
-                                );
-                            }
-                        );
+                        const userService: UserModel = new UserModel(map.username, map.name, map.email);
+                        this.user = userService;
+                        return true;
                     }
                 )
-        )
+            )
         } else {
-            return Observable.throw(false);
+            return Observable.of(false);
         }
     }
 
