@@ -18,6 +18,14 @@ import { RegisterPage } from '../pages/register/register';
 import {Device} from '@ionic-native/device';
 import { Network } from '@ionic-native/network';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 
 const pages = [
   MyApp,
@@ -31,8 +39,16 @@ const pages = [
 @NgModule({
   declarations: pages,
   imports: [
+    HttpClientModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
     // IonicPageModule.forChild(ForgotPage)
   ],
   bootstrap: [IonicApp],

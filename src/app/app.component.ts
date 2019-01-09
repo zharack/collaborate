@@ -9,7 +9,7 @@ import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import {MapPage}from '../pages/map/map';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   templateUrl: 'app.html'
 })
@@ -23,7 +23,8 @@ export class MyApp {
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public geolocation: GeoManagerProvider
+    public geolocation: GeoManagerProvider,
+    private translate: TranslateService
     ) {
     this.initializeApp();
 
@@ -36,7 +37,7 @@ export class MyApp {
       { title: 'Register', component: RegisterPage }
 
     ];
-
+    translate.setDefaultLang('es');
   }
 
   initializeApp() {
@@ -54,5 +55,9 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     // this.nav.push(page.component);
     this.nav.setRoot(page.component);
+  }
+
+  setLang(lang:string){
+    this.translate.use(lang);
   }
 }

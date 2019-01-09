@@ -127,7 +127,6 @@ export class GeoManagerProvider {
     try{
       clearTimeout(this.timecounter);
     }catch(err){}
-    debugger;
     this.timecounter = setTimeout(()=>{
       // this.geolocation.getCurrentPosition().then((ref)=>{
       //   let transformed = this.transformCall();

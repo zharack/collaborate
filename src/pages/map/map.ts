@@ -47,7 +47,6 @@ export class MapPage {
 
     this.geoManager.startWatch().subscribe((ref:GeoManagerModel)=>{
       console.log('STARTING', ref);
-      debugger;
       if(ref && ref.success && !this.mapLoaded){
         let mapOptions: GoogleMapOptions = {
           camera: {
