@@ -11,7 +11,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GeoManagerProvider } from '../providers/geo-manager/geo-manager';
 import { Geolocation } from '@ionic-native/geolocation';
 
-
 import { MapPage } from '../pages/map/map';
 // import { GoogleMaps } from '@ionic-native/google-maps';
 import { LoginPage } from '../pages/login/login';
@@ -23,6 +22,9 @@ import { Network } from '@ionic-native/network';
 // CAMARA
 import { Camera } from '@ionic-native/camera';
 import { CameraPage } from '../pages/camera/camera';
+
+// FILE
+import { File } from '@ionic-native/file'; 
 
 const pages = [
   MyApp,
@@ -50,6 +52,7 @@ const pages = [
     StatusBar,
     SplashScreen,
     Camera,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GeoManagerProvider
     // ,GoogleMaps

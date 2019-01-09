@@ -6,7 +6,7 @@
 
 <ion-content padding class="card-background-page">
 
-  <button ion-button full  (click)="takePhoto()">
+  <button ion-button full (click)="captureImage()">
     <ion-icon name="camera"></ion-icon>&nbsp;Takee Photo
     </button>
 
@@ -17,7 +17,7 @@
             <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
             <img [src]="photo" *ngIf="photo" />
           </ion-card>
-  </ion-col>
+        </ion-col>
       </ion-row>
     </ion-grid>
 </ion-content>
