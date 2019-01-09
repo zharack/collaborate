@@ -1,7 +1,7 @@
 import { GeoManagerProvider, GeoManagerModel } from './../../providers/geo-manager/geo-manager';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
-import { Geoposition } from '../../../node_modules/@ionic-native/geolocation';
+// import { Geoposition } from '../../../node_modules/@ionic-native/geolocation';
 import { Subscription } from 'rxjs/Subscription';
 
 
