@@ -5,7 +5,7 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "brwoser": "ionic-app-scripts cordova run browser",
+    "browser": "ionic-app-scripts cordova run browser",
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
@@ -69,8 +69,8 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyBbuIOXmkpNn0x8dypFRAaSzJsUi9DxsPo",
-        "API_KEY_FOR_IOS": "AIzaSyBbuIOXmkpNn0x8dypFRAaSzJsUi9DxsPo",
+        "API_KEY_FOR_ANDROID": "AIzaSyCvOaaXFM3Of838uif4O450lUNBt57JxD4",
+        "API_KEY_FOR_IOS": "AIzaSyCvOaaXFM3Of838uif4O450lUNBt57JxD4",
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
